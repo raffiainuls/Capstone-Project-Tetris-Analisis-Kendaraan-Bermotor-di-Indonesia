@@ -99,7 +99,7 @@ elif category == 'HATCHBACK':
     st.plotly_chart(plot_line_top_car_hatchback, use_container_width=True, height = 500)
 
 st.markdown("<h1 style = 'text-align : left; color : white; font-size : 20px; font-family : Arial;'> <b>Analisis Mobil Listrik di Indonesia<b></h1>", unsafe_allow_html= True)
-paragraf9= '''<p style = 'font-size 14px; font-family : Arial;'> Perkembangan teknologi di dunia saat ini sangat pesat, dan hal tersebut tentunya juga terjadi di sektor industri otomotif. Pada saat ini sudah banyak mobil yang mempunyai teknologi yang canggih,
+paragraf9= '''<p style = 'font-size : 14px; font-family : Arial;'> Perkembangan teknologi di dunia saat ini sangat pesat, dan hal tersebut tentunya juga terjadi di sektor industri otomotif. Pada saat ini sudah banyak mobil yang mempunyai teknologi yang canggih,
 contoh penerapan teknologi itu dapat dilihat dari munculnya mobil listrik yang sudah mulai banyak berkeliaran di Indonesia. Tentunya hal ini juga untuk mengatasi pencemaran udara yang bisa diakibatkan oleh penggualaan bahan bakar mobil konvensional. Di Indonesia sendiri
 tecatat oleh data sudah ada 3 jenis mobil electrik yaitu Electric Vehicle (EV), Plugin Electric Vehicle (PHEV), dan Hybrid. EV merupakan jenis mobil listrik
 yang merupakan mobil full menggunakan tenaga listrik dan tidak mempunyai rangkaian mesin bensin ataupun diesel dilamnya, PHEV merupakan mobil listrik yang tenaganya dihasilkan dari baterai sebagai sumber tenaga, namun baterai tersebut kapasitas lebih kecil jika dibandingkan 
