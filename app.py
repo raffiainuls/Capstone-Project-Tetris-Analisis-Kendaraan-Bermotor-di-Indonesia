@@ -125,14 +125,18 @@ st.plotly_chart(sales, use_container_width=True)
 paragraf12= ''' <p style = 'font-size: 14px; font-family : Arial;'>Nah seteah kita amati grafik diatas ternyata tidak selalu IPR, penjualan mobil dan mobil selaras. Menariknya dari grafik diatas kita mendapatkan informasi bahwa
 ternyata setiap tahun pada saat mendekati hari raya idul fitri penjualan mobil di Indonesia sejak 2019 sampai 2020 selalu turun. Pada 2019 penjualan mobil dengan IPR selaras atau sama sama mengalami penurunan. Pada 2020 pada saat mendekati lebaran 
 IPR dan penjualan motor naik sedangkan penjualan mobil turun. Pada 2021 penjualan mobil dan motor tidak selaras dengan IPR yang naik. Kemudian pada 2022 mendekati lebaran IPR, penjualan mobil dan motor sama - sama turun. Dari informasi tersebut kita bisa simpulkan
-tidak selamanya IPR selaras atau merepresentasi kan penjualan otomotif di Indonesia, dan juga penjualan otomotif motor dan mobil tidak selamanya selaras pula. Jika selama mendekati lebaran penjualan mobil turun ada faktor, bisa jadi dikarenakan memang minat konsumtif masyarakat pada saat mendekati lebaran turun atau ekonomi di indonesia yang turun, hal tersebut sesuai dengan kondisi pada lebaran 2019 dan 2022. Kemudian pada saat lebaran 2020, 2021 yang dimana
-tingkat IPR yang naik yang berarti tingkat ekonomi di Indonesia naik dan minat konsumtif masyarakat di Indonesia juga dapat diasumsikan naik tidak berbanding lurus dengan sektor penjualan mobil, mungkin masyarakat Indonesia pada saat itu lebih memilih untuk membeli kebutuhan lainnya yang berkaitan dengan lebaran dari pada membeli mobil.
-Untuk mengatasi hal tersebut mungkin dapat dilakukan promosi, promo atau diskon menarik mendekati lebaran yang dapat menarik perhatian masyarakat untuk melakukan pembelian mobil.</p>
+tidak selamanya IPR selaras atau merepresentasi kan penjualan otomotif di Indonesia, dan juga penjualan otomotif motor dan mobil tidak selamanya selaras pula.</p>
 '''
 st.markdown(paragraf12, unsafe_allow_html=True)
-
-
-
+paragraf13= ''' <p style = 'font-size: 14px; font-family : Arial;'>Jika selama mendekati lebaran penjualan mobil turun 
+ada faktor, bisa jadi dikarenakan memang minat konsumtif masyarakat pada saat mendekati lebaran turun atau ekonomi di 
+indonesia yang turun, hal tersebut sesuai dengan kondisi pada lebaran 2019 dan 2022. Kemudian pada saat lebaran 2020, 2021 
+yang dimana tingkat IPR yang naik yang berarti tingkat ekonomi di Indonesia naik dan minat konsumtif masyarakat di Indonesia 
+juga dapat diasumsikan naik tidak berbanding lurus dengan sektor penjualan mobil, mungkin masyarakat Indonesia pada saat itu 
+lebih memilih untuk membeli kebutuhan lainnya yang berkaitan dengan lebaran dari pada membeli mobil. Untuk mengatasi hal tersebut mungkin dapat dilakukan promosi, 
+promo atau diskon menarik mendekati lebaran yang dapat menarik perhatian masyarakat untuk melakukan pembelian mobil.
+</p>'''
+st.markdown(paragraf13, unsafe_allow_html=True)
 
 
 
