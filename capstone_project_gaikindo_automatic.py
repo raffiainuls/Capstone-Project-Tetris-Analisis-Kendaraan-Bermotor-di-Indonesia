@@ -424,9 +424,9 @@ query_category = '''
         Sales DESC, TAHUN ASC
 '''
 data_category = pd.read_sql_query(query_category, conn)
-data_category['TAHUN'] = pd.to_datetime(data_category['TAHUN'], format='%Y').dt.year
+#data_category['TAHUN'] = pd.to_datetime(data_category['TAHUN'], format='%Y').dt.year
 
-data_category
+data_category.sort_values('Sales', ascending = False)
 
 import plotly.express as px
 
