@@ -103,7 +103,7 @@ category_sales = category_sales.head(5)
 
 top_brand_category = car_data.groupby(['BRAND', 'CATEGORY'])['Total'].sum().reset_index()
 top_brand_category = top_brand_category.loc[top_brand_category['BRAND'].isin(['TOYOTA','DAIHATSU','HONDA', 'MITSUBISHI MOTORS'])]
-top_brand_category.sort_values(['BRAND', 'Total'], ascending = False, inplace = True)
+top_brand_category.sort_values(['BRAND', 'Total','CATEGORY'], ascending = False, inplace = True)
 
 plot_top_brand_category = px.bar(top_brand_category, x = 'BRAND', y = 'Total', color = 'CATEGORY', barmode = 'group')
 plot_top_brand_category.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
@@ -111,7 +111,7 @@ plot_top_brand_category.update_xaxes(title = 'Sumber data : Wholesales Gaikindo'
 
 lineup_brand_category = car_data.groupby(['BRAND', 'CATEGORY'])['TYPE MODEL'].count().reset_index()
 lineup_brand_category = lineup_brand_category.loc[lineup_brand_category['BRAND'].isin(['TOYOTA','DAIHATSU','HONDA', 'MITSUBISHI MOTORS'])]
-lineup_brand_category.sort_values(['BRAND', 'TYPE MODEL'], ascending = False, inplace = True)
+lineup_brand_category.sort_values(['BRAND', 'TYPE MODEL','CATEGORY'], ascending = False, inplace = True)
 
 plot_lineup_brand_category = px.bar(lineup_brand_category, x = 'BRAND', y = 'TYPE MODEL', color = 'CATEGORY', barmode = 'group')
 plot_lineup_brand_category.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
