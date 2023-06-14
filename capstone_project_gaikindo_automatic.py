@@ -76,7 +76,7 @@ brand_sales = brand_sales.head(10)
 
 colors = ['#DC0000', '#DC0000', '#DC0000', '#DC0000', '#850000', '#850000', '#850000', '#850000', '#850000', '#850000']
 plot_10_sales_brand =px.bar(brand_sales, x = 'BRAND', y = 'Total', color = 'BRAND', color_discrete_sequence = colors)
-plot_10_sales_brand.update_xaxes(title = 'Sumber data : Whosales Gaikindo')
+plot_10_sales_brand.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
 
 """## Analisis Category"""
@@ -92,7 +92,7 @@ plot_sales_category = px.pie(category_sales,
                              hole = 0.5)
 plot_sales_category.update_traces(textposition = 'outside',textfont = dict(color = 'white', size = 13), textinfo = "label+percent", pull = [0.2,0,0,0,0])
 plot_sales_category.add_annotation(text = "<b>Sales by Category<b>", showarrow = False,font = dict(size = 14, color = 'white'))
-plot_sales_category.update_xaxes(title = 'Sumber data : Whosales Gaikindo')
+plot_sales_category.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
 
 """##Analisis Category Top Brand"""
@@ -106,7 +106,7 @@ top_brand_category = top_brand_category.loc[top_brand_category['BRAND'].isin(['T
 top_brand_category.sort_values(['BRAND', 'Total'], ascending = False, inplace = True)
 
 plot_top_brand_category = px.bar(top_brand_category, x = 'BRAND', y = 'Total', color = 'CATEGORY', barmode = 'group')
-plot_top_brand_category.update_xaxes(title = 'Sumber data : Whosales Gaikindo')
+plot_top_brand_category.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
 
 lineup_brand_category = car_data.groupby(['BRAND', 'CATEGORY'])['TYPE MODEL'].count().reset_index()
@@ -114,7 +114,7 @@ lineup_brand_category = lineup_brand_category.loc[lineup_brand_category['BRAND']
 lineup_brand_category.sort_values(['BRAND', 'TYPE MODEL'], ascending = False, inplace = True)
 
 plot_lineup_brand_category = px.bar(lineup_brand_category, x = 'BRAND', y = 'TYPE MODEL', color = 'CATEGORY', barmode = 'group')
-plot_lineup_brand_category.update_xaxes(title = 'Sumber data : Whosales Gaikindo')
+plot_lineup_brand_category.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
 
 """## Analisis Top Car in Top Brand
@@ -274,7 +274,7 @@ def plot_top_car_by_category(conn, query):
   data = pd.read_sql_query(query, conn)
   
   fig = px.bar(data, x = 'Total', y = 'Name', color = 'Name')
-  fig.update_xaxes(title = 'Sumber data : Whosales Gaikindo')
+  fig.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
   
   return(fig)
 
@@ -386,7 +386,7 @@ def line_top_car(query, conn):
   data = pd.read_sql_query(query, conn)
   data['TAHUN'] = data['TAHUN'].astype(str)
   fig = px.line(data, x = 'TAHUN', y='Sales', color = 'Name', markers = True)
-  fig.update_xaxes(title = 'Sumber data : Whosales Gaikindo')
+  fig.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
   return fig
 
@@ -424,6 +424,7 @@ query_category = '''
         Sales DESC, TAHUN ASC
 '''
 data_category = pd.read_sql_query(query_category, conn)
+data_category['TAHUN'] = data_category['TAHUN'].astype(str)
 #data_category['TAHUN'] = pd.to_datetime(data_category['TAHUN'], format='%Y').dt.year
 
 data_category.sort_values('Sales', ascending = False)
@@ -431,7 +432,7 @@ data_category.sort_values('Sales', ascending = False)
 import plotly.express as px
 
 category_area = px.area(data_category, x="TAHUN", y="Sales", color="CATEGORY")
-category_area.update_xaxes(title = 'Sumber data : Whosales Gaikindo')
+category_area.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
 
 """#Analisis Speed CC """
@@ -468,7 +469,7 @@ data['SPEED'] = data['SPEED'].replace(mapping)
 scatter_speed_cc = px.scatter(data, x="SPEED", y="CC", animation_frame="Tanggal",
           color="CATEGORY", size = 'Sales', size_max = 55, range_x = [50,250], range_y= [0,10000],
            log_x=True,)
-scatter_speed_cc.update_xaxes(title = 'Sumber data : Whosales Gaikindo')
+scatter_speed_cc.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
 
 #fig["layout"].pop("updatemenus") # optional, drop animation buttons
@@ -504,7 +505,7 @@ car_electric['TAHUN'] = car_electric['TAHUN'].astype(int)
 import plotly.express as px
 
 plot_electric = px.area(car_electric, x="TAHUN", y="Sales", color="FUEL", markers = True)
-plot_electric.update_xaxes(title = 'Sumber data : Whosales Gaikindo')
+plot_electric.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
 
 
@@ -633,4 +634,4 @@ annotations.append(dict(xref='paper', yref='paper', x=0.65, y=0.85,
                               showarrow=False))
 
 sales.update_layout(annotations=annotations)
-sales.update_xaxes(title = 'Sumber data : Whosales Gaikindo, Databooks, Asosiasi Industri Sepeda Motor Indonesia')
+sales.update_xaxes(title = 'Sumber data : Wholesales Gaikindo, Databooks, Asosiasi Industri Sepeda Motor Indonesia')
