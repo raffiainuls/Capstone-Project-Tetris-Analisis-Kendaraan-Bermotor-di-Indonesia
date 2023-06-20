@@ -122,6 +122,14 @@ yang memberikan informasi tentang penjualan barang eceran di Indonesia, jika ind
 '''
 st.markdown(paragraf11, unsafe_allow_html=True)
 st.plotly_chart(sales, use_container_width=True)
+
+sentence3 = '''<p style = 'font-size : 14px; font-family : Aril'> <strong>Grafik diatas merupakan line chart penggabungan total sales motor, mobil, dan nilai IPR setiap tahunnya.
+Dikarenkan dari ketiga variabel tersebut mempunyai rentang nilai yang berbeda maka untuk lebih jelas melihat perbandingan dari ketiganya, dilakukan normalisasi nilai, sehingga nilai dari line tersebut tidak menunjukan jumlah sales 
+yang sesungguhnya dari mobil, motor maupun nilai index IPR. Grafik diatas hanya untuk melihat apakah naik turunnya nilai setip varibel selalu selaras atau tidak.<strong></p>
+'''
+st.markdown(sentence3, unsafe_allow_html=True)
+
+
 paragraf12= ''' <p style = 'font-size: 14px; font-family : Arial;'>Nah seteah kita amati grafik diatas ternyata tidak selalu IPR, penjualan mobil dan mobil selaras. Menariknya dari grafik diatas kita mendapatkan informasi bahwa
 ternyata setiap tahun pada saat mendekati hari raya idul fitri penjualan mobil di Indonesia sejak 2019 sampai 2020 selalu turun. Pada 2019 penjualan mobil dengan IPR selaras atau sama sama mengalami penurunan. Pada 2020 pada saat mendekati lebaran 
 IPR dan penjualan motor naik sedangkan penjualan mobil turun. Pada 2021 penjualan mobil dan motor tidak selaras dengan IPR yang naik. Kemudian pada 2022 mendekati lebaran IPR, penjualan mobil dan motor sama - sama turun. Dari informasi tersebut kita bisa simpulkan

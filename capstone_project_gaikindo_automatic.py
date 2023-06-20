@@ -74,21 +74,24 @@ brand_sales.sort_values(by='Total', ascending = False, inplace = True)
 brand_sales.reset_index(inplace = True)
 brand_sales = brand_sales.head(10)
 
-colors = ['#DC0000', '#DC0000', '#DC0000', '#DC0000', '#850000', '#850000', '#850000', '#850000', '#850000', '#850000']
+colors = ['#DC0000', '#DC0000', '#DC0000', '#E4DCCF', '#E4DCCF', '#E4DCCF', '#E4DCCF', '#E4DCCF', '#E4DCCF', '#E4DCCF']
 plot_10_sales_brand =px.bar(brand_sales, x = 'BRAND', y = 'Total', color = 'BRAND', color_discrete_sequence = colors)
+plot_10_sales_brand.update_yaxes(title = 'Sales', title_font = dict(size = 14, color = 'white', family = 'arial'))
 plot_10_sales_brand.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
 
 """## Analisis Category"""
-
-category_sales = car_data.pivot_table(values = 'Total', index = 'CATEGORY', aggfunc = 'sum')
+data_pie = car_data.loc[car_data['CATEGORY'].isin(['MPV','SUV/CROSSOVER', 'LCGC', 'HATCHBACK','DOUBLE CABIN','SEDAN'])]
+category_sales = data_pie.pivot_table(values = 'Total', index = 'CATEGORY', aggfunc = 'sum')
 category_sales.sort_values(by = 'Total', ascending = False, inplace = True)
 category_sales = category_sales.head(5)
 
+color_pie = ['#0079FF','#00DFA2','#F6FA70','#FF0060','#E55807']
 plot_sales_category = px.pie(category_sales, 
                              values = 'Total',
                              names = category_sales.index,
-                             color = category_sales.index, 
+                             color = category_sales.index,
+                             color_discrete_sequence=color_pie, 
                              hole = 0.5)
 plot_sales_category.update_traces(textposition = 'outside',textfont = dict(color = 'white', size = 13), textinfo = "label+percent", pull = [0.2,0,0,0,0])
 plot_sales_category.add_annotation(text = "<b>Sales by Category<b>", showarrow = False,font = dict(size = 14, color = 'white'))
@@ -103,17 +106,21 @@ category_sales = category_sales.head(5)
 
 top_brand_category = car_data.groupby(['BRAND', 'CATEGORY'])['Total'].sum().reset_index()
 top_brand_category = top_brand_category.loc[top_brand_category['BRAND'].isin(['TOYOTA','DAIHATSU','HONDA', 'MITSUBISHI MOTORS'])]
+top_brand_category = top_brand_category.loc[top_brand_category['CATEGORY'].isin(['MPV','SUV/CROSSOVER', 'LCGC', 'HATCHBACK','DOUBLE CABIN','SEDAN'])]
 top_brand_category.sort_values(['BRAND', 'Total','CATEGORY'], ascending = False, inplace = True)
 
-plot_top_brand_category = px.bar(top_brand_category, x = 'BRAND', y = 'Total', color = 'CATEGORY', barmode = 'group')
+plot_top_brand_category = px.bar(top_brand_category, x = 'BRAND', y = 'Total', color = 'CATEGORY')
+plot_top_brand_category.update_yaxes(title = 'Sales', title_font = dict(color = 'white', size = 13, family = 'arial'))
 plot_top_brand_category.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
 
 lineup_brand_category = car_data.groupby(['BRAND', 'CATEGORY'])['TYPE MODEL'].count().reset_index()
 lineup_brand_category = lineup_brand_category.loc[lineup_brand_category['BRAND'].isin(['TOYOTA','DAIHATSU','HONDA', 'MITSUBISHI MOTORS'])]
+lineup_brand_category = lineup_brand_category.loc[lineup_brand_category['CATEGORY'].isin(['MPV','SUV/CROSSOVER', 'LCGC', 'HATCHBACK','DOUBLE CABIN','SEDAN'])]
 lineup_brand_category.sort_values(['BRAND', 'TYPE MODEL','CATEGORY'], ascending = False, inplace = True)
 
-plot_lineup_brand_category = px.bar(lineup_brand_category, x = 'BRAND', y = 'TYPE MODEL', color = 'CATEGORY', barmode = 'group')
+plot_lineup_brand_category = px.bar(lineup_brand_category, x = 'BRAND', y = 'TYPE MODEL', color = 'CATEGORY')
+plot_lineup_brand_category.update_yaxes(title = 'Count Model', title_font = dict(size = 13, family = 'arial'))
 plot_lineup_brand_category.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
 
@@ -385,7 +392,9 @@ query_line_lcgc = '''
 def line_top_car(query, conn):
   data = pd.read_sql_query(query, conn)
   data['TAHUN'] = data['TAHUN'].astype(str)
+  data.sort_values(by=['TAHUN', 'Sales'], ascending=[True, False], inplace=True)
   fig = px.line(data, x = 'TAHUN', y='Sales', color = 'Name', markers = True)
+  fig.update_layout(xaxis= {'type': 'category', 'categoryorder' : 'array', 'categoryarray' : data['TAHUN']})
   fig.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
   return fig
@@ -418,21 +427,25 @@ query_category = '''
         TAHUN
       FROM
         data
+      WHERE CATEGORY IN ('LCGC', 'MPV', 'SUV/CROSSOVER', 'HATCHBACK', 'DOUBLE CABIN', 'SEDAN')
       GROUP BY
         CATEGORY,TAHUN
       ORDER BY 
         Sales DESC, TAHUN ASC
 '''
 data_category = pd.read_sql_query(query_category, conn)
-data_category['TAHUN'] = data_category['TAHUN'].astype(str)
-#data_category['TAHUN'] = pd.to_datetime(data_category['TAHUN'], format='%Y').dt.year
+data_area_category = data_category
+data_area_category['TAHUN'] = data_area_category['TAHUN'].astype(str)
+data_area_category.sort_values(by=['TAHUN', 'Sales'], ascending=[True, False], inplace=True)
 
-data_category.sort_values('Sales', ascending = False)
 
 import plotly.express as px
 
-category_area = px.area(data_category, x="TAHUN", y="Sales", color="CATEGORY")
+category_area = px.area(data_category, x='TAHUN', y="Sales", color="CATEGORY")
+#category_area.update_layout(xaxis= {'type': 'category'})
+category_area.update_layout(xaxis={'type': 'category', 'categoryorder': 'array', 'categoryarray': data_area_category['TAHUN']})
 category_area.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
+category_area.update_yaxes(title = 'Sales')
 
 
 """#Analisis Speed CC """
@@ -499,12 +512,14 @@ query_electric = '''
 
 '''
 car_electric = pd.read_sql_query(query_electric, conn)
-car_electric['TAHUN'] = car_electric['TAHUN'].astype(int)
+car_electric['TAHUN'] = car_electric['TAHUN'].astype(str)
+car_electric.sort_values(['TAHUN', 'Sales'], ascending = [True, False], inplace = True)
 
 
 import plotly.express as px
 
 plot_electric = px.area(car_electric, x="TAHUN", y="Sales", color="FUEL", markers = True)
+plot_electric.update_layout(xaxis={'type': 'category', 'categoryorder': 'array', 'categoryarray': car_electric['TAHUN']})
 plot_electric.update_xaxes(title = 'Sumber data : Wholesales Gaikindo')
 
 
@@ -577,7 +592,7 @@ sales.update_layout(
         linewidth=2
     ),
     yaxis=dict(
-        title_text='Jumlah',
+        title_text='Nilai',
         titlefont=dict(
             family='Rockwell',
             size=26,
